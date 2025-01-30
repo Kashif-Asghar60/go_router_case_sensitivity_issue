@@ -27,39 +27,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-class CustomRouteInformationParser extends RouteInformationParser<Uri> {
-  @override
-  Future<Uri> parseRouteInformation(RouteInformation routeInformation) async {
-    // Normalize the path to lowercase
-    final uri = Uri.parse(routeInformation.location ?? '/');
-    final normalizedPath = uri.path.toLowerCase();
-    return uri.replace(path: normalizedPath);
-  }
-
-  @override
-  RouteInformation restoreRouteInformation(Uri configuration) {
-    return RouteInformation(location: configuration.toString());
-  }
-}
- 
-/* 
-class MyApp extends StatelessWidget {
-  final CustomRouteInformationParser routeInformationParser = CustomRouteInformationParser();
-  final CustomRouterDelegate routerDelegate = CustomRouterDelegate();
-
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp.router(
-      title: 'Flutter Web Navigation',
-      routeInformationParser: routeInformationParser,
-      routerDelegate: routerDelegate,
-      debugShowCheckedModeBanner: false,
-      builder: (context, child) {
-        return HomePage(routerDelegate: routerDelegate);
-      },
-    );
-  }
-}
- */
